@@ -1,0 +1,19 @@
+{
+	"name": "crypto_falcon_js",
+	"version": "1.0.0",
+	"description": "JavaScript wrapper around Pornin's implementation of Falcon",
+	"main": "./dist/falcon_API.js",
+	"types": "./types/types.ts",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/Post-Quantum-Team/Post-Quantum-Near-Falconjs"
+	},
+	"keywords": [
+		"cryptography",
+		"post-quantum",
+		"falcon",
+		"asm.js",
+		"webassembly"
+	],
+	"author": "Post Quantum Team (https://github.com/Post-Quantum-Team)"
+}
