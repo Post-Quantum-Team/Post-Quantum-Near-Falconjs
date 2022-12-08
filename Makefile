@@ -24,7 +24,6 @@ all:
 			-s EXPORTED_FUNCTIONS=\"[ \
 				'"'"'_free'"'"', \
 				'"'"'_malloc'"'"', \
-				'"'"'_initialize_random'"'"', \
 				'"'"'_falconjs_keypair'"'"', \
 				'"'"'_falconjs_pubkey'"'"', \
 				'"'"'_falconjs_tmpsize_keygen'"'"', \

@@ -5,16 +5,6 @@
 
 const unsigned NEAR_FALCON_DEGREE = 9;
 
-void initialize_random() {
-	srand(time(NULL));
-}
-
-void generate_random_shake256(shake256_context *sc) {
-	int i = 0;
-	for(i=0; i<25; i++) {
-		sc->opaque_contents[i] = rand();
-	}
-}
 
 size_t falconjs_public_key_bytes () {
 	return FALCON_PUBKEY_SIZE(NEAR_FALCON_DEGREE);
@@ -48,19 +38,18 @@ void shake_256_from_seed(shake256_context *sc, const void *seed, size_t seed_len
 	shake256_init_prng_from_seed(sc, seed, seed_len);
 }
 
-void shake256_from_system(shake256_context *sc) {
-	int status = shake256_init_prng_from_system(sc);
-}
-
 long falconjs_keypair (
 	uint8_t* public_key,
 	uint8_t* private_key,
-	uint8_t* tmp
+	uint8_t* tmp,
+	uint8_t* seed,
+	int seed_size
 ) {
-	shake256_context *shake_context = (shake256_context *)malloc(sizeof(shake256_context));
-	generate_random_shake256(shake_context);
+	//shake256_context *shake_context = (shake256_context *)malloc(sizeof(shake256_context));
+	shake256_context shake_context;
+	shake256_init_prng_from_seed(&shake_context, seed, seed_size);
 	int status = falcon_keygen_make(
-		shake_context,
+		&shake_context,
 		NEAR_FALCON_DEGREE,
 		private_key,
 		falconjs_secret_key_bytes(),
@@ -69,7 +58,7 @@ long falconjs_keypair (
 		tmp,
 		falconjs_tmpsize_keygen()
 	);
-	free(shake_context);
+	//free(shake_context);
 	return status;
 }
 
@@ -93,13 +82,17 @@ long falconjs_sign (
 	const uint8_t* m,
 	unsigned long mlen,
 	const uint8_t* sk,
-	uint8_t* tmp
+	uint8_t* tmp,
+	uint8_t* seed,
+	int seed_size
 ) {
-	shake256_context *shake_context = (shake256_context *)malloc(sizeof(shake256_context));
-	generate_random_shake256(shake_context);
+	//shake256_context *shake_context = (shake256_context *)malloc(sizeof(shake256_context));
+	//shake256_init_prng_from_seed(shake_context, seed, seed_size);
+	shake256_context shake_context;
+	shake256_init_prng_from_seed(&shake_context, seed, seed_size);
 	size_t sig_bytes = falconjs_signature_bytes();
 	int status = falcon_sign_dyn(
-		shake_context,
+		&shake_context,
 		sig,
 		&sig_bytes,
 		FALCON_SIG_PADDED,
@@ -110,7 +103,7 @@ long falconjs_sign (
 		tmp,
 		falconjs_tmpsize_signdyn()
 	);
-	free(shake_context);
+	//free(shake_context);
 	return status;
 }
 
