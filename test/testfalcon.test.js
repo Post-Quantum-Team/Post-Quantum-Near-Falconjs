@@ -19,7 +19,10 @@ test('test keypair from seed', async () => {
 test('test make public key', async () => {
     const keypair = falcon_api.keyPair();
     const pubkey = falcon_api.pubKey(keypair.privateKey);
-    expect(keypair.publicKey === pubkey).toBeTruthy();
+    for(let i = 0; i < pubkey.length; i++) {
+        expect(keypair.publicKey[i] === pubkey[i]).toBeTruthy();
+    }
+    //expect(keypair.publicKey === pubkey).toBeTruthy();
     // toBeTruthy to add just before
 });
 

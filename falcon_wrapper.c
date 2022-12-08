@@ -45,7 +45,6 @@ long falconjs_keypair (
 	uint8_t* seed,
 	int seed_size
 ) {
-	//shake256_context *shake_context = (shake256_context *)malloc(sizeof(shake256_context));
 	shake256_context shake_context;
 	shake256_init_prng_from_seed(&shake_context, seed, seed_size);
 	int status = falcon_keygen_make(
@@ -58,7 +57,6 @@ long falconjs_keypair (
 		tmp,
 		falconjs_tmpsize_keygen()
 	);
-	//free(shake_context);
 	return status;
 }
 
@@ -86,8 +84,6 @@ long falconjs_sign (
 	uint8_t* seed,
 	int seed_size
 ) {
-	//shake256_context *shake_context = (shake256_context *)malloc(sizeof(shake256_context));
-	//shake256_init_prng_from_seed(shake_context, seed, seed_size);
 	shake256_context shake_context;
 	shake256_init_prng_from_seed(&shake_context, seed, seed_size);
 	size_t sig_bytes = falconjs_signature_bytes();
@@ -103,7 +99,6 @@ long falconjs_sign (
 		tmp,
 		falconjs_tmpsize_signdyn()
 	);
-	//free(shake_context);
 	return status;
 }
 
