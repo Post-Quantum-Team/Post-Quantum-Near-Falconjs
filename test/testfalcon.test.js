@@ -22,8 +22,6 @@ test('test make public key', async () => {
     for(let i = 0; i < pubkey.length; i++) {
         expect(keypair.publicKey[i] === pubkey[i]).toBeTruthy();
     }
-    //expect(keypair.publicKey === pubkey).toBeTruthy();
-    // toBeTruthy to add just before
 });
 
 test('test sign and open', async () => {
