@@ -9,7 +9,7 @@ all:
 			-s ALIASING_FUNCTION_POINTERS=1 \
 			-s DISABLE_EXCEPTION_CATCHING=1 \
 			-s FORCE_FILESYSTEM=1 \
-			-s BINARYEN_ASYNC_COMPILATION=0 \
+			-s WASM_ASYNC_COMPILATION=0 \
 			-s ERROR_ON_UNDEFINED_SYMBOLS=0 \
 			-Ifalcon_c \
 			$$( \
@@ -38,5 +38,5 @@ all:
 			]\" \
 		" | perl -pe "s/\s+/ /g" | perl -pe "s/\[ /\[/g" | perl -pe "s/ \]/\]/g")"; \
 		\
-		bash -c "emcc $$args -o falcon_wrapper.js"; \
+		bash -c "emcc -s WASM=1 $$args -o falcon_wrapper.js"; \
 	'
