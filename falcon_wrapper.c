@@ -49,7 +49,7 @@ void shake_256_from_seed(shake256_context *sc, const void *seed, size_t seed_len
 }
 
 void shake256_from_system(shake256_context *sc) {
-	int status = shake256_init_prng_from_system(sc);
+	shake256_init_prng_from_system(sc);
 }
 
 long falconjs_keypair (

@@ -13,7 +13,7 @@ declare module 'crypto_falcon_js' {
 		keyPair () : {privateKey: Uint8Array; publicKey: Uint8Array};
 
 		/** Generates public key from secret key. */
-		pubKey (privateKey: Uint8Array) : {publicKey: Uint8Array};
+		pubKey (privateKey: Uint8Array) : Uint8Array;
 
 		/** Verifies signed message against publicKey and returns it. */
 		open (signed: Uint8Array, publicKey: Uint8Array) : Uint8Array;

@@ -73,9 +73,7 @@ var falcon	= (function () {
                     tmpBuffer
                 );
     
-                return dataReturn(returnValue, {
-                    publicKey: dataResult(publicKeyBuffer, publicKeyBytes)
-                });
+                return dataReturn(returnValue, dataResult(publicKeyBuffer, publicKeyBytes));
             }
             finally {
                 dataFree(publicKeyBuffer);
